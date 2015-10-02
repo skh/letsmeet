@@ -4,6 +4,8 @@ from flask.ext.login import login_user, logout_user, login_required, \
 from . import auth
 from .forms import LoginForm
 
+print 'auth.views loaded'
+
 @auth.before_app_request
 def before_request():
     if current_user.is_authenticated \
