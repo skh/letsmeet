@@ -2,7 +2,6 @@ from flask import redirect, request, url_for
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import auth
-from .forms import LoginForm
 
 print 'auth.views loaded'
 
