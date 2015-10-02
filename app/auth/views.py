@@ -1,9 +1,7 @@
-from flask import redirect, request, url_for
+from flask import redirect, request, url_for, render_template
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import auth
-
-print 'auth.views loaded'
 
 @auth.before_app_request
 def before_request():
@@ -18,3 +16,7 @@ def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
         return redirect(url_for('main.index'))
     return render_template('auth/unconfirmed.html')
+
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('auth/login.html')
