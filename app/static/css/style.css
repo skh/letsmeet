@@ -6,3 +6,9 @@
 	font-size: 36px;
 	font-weight: bold;
 }
+
+.topbar-logo {
+	height: 28px;
+	width: 28px;
+	margin-right: 4px;
+}
