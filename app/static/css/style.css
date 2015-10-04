@@ -10,5 +10,7 @@
 .topbar-logo {
 	height: 28px;
 	width: 28px;
-	margin-right: 4px;
+	position: absolute;
+	left: -24px;
+	top: 8px;
 }
