@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Register an account</h1>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<form>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Email
+        <input type="text" name="email" placeholder="Email">
+      </label>
+      <label>Name
+        <input type="text" name="name" placeholder="Name">
+      </label>
+      <label>Password
+        <input type="password" name="password" placeholder="Password">
+      </label>
+      <label>Confirm password
+        <input type="password" name="password" placeholder="Confirm password">
+      </label>
+      <input type="submit" class="button" value="Register">
+    </div>
+  </div>
+</form>
+{% endblock %}
