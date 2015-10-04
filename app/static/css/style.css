@@ -1,1 +1,8 @@
 /* style.css */
+
+.header h1 {
+	padding: 24px 0;
+	font-family: "Droid Sans", sans-serif;
+	font-size: 36px;
+	font-weight: bold;
+}

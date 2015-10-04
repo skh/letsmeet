@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>Login</h1>
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Login</h1>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<form>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Email
+        <input type="text" name="email" placeholder="Enter Email">
+      </label>
+      <label>Password
+        <input type="password" name="password" placeholder="Enter Password">
+      </label>
+      <p>No account yet? Register <a href="#">here</a>.</p>
+      <input type="submit" class="button" value="Log In">
+    </div>
+  </div>
+</form>
 {% endblock %}
