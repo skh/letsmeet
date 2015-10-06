@@ -27,6 +27,26 @@ def login():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        return "<h1>form posted!</h1>"
+        missing = []
+        invalid = []
+        # validate fields
+        if request.form['email'] == "":
+            missing.append('email')
+        if request.form['name'] == "":
+            missing.append('name')
+        if request.form['password'] == "":
+            missing.append('password')
+        if request.form['confirm_password'] == "":
+            missing.append('confirm_password')
+        # if not valid, show error
+        if len(missing) > 0:
+            # TODO: flash error message
+            return render_template('auth/register.html')
+        elif request.form['confirm_password'] != request.form['password']:
+            # TODO: flash error message
+            return render_template('auth/register.html')
+        else:
+            return "<h1>I am trapped in a DOM tree</h1>"
+
     else:
         return render_template('auth/register.html')
