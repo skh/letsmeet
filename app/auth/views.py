@@ -2,6 +2,8 @@ from flask import redirect, request, url_for, render_template
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import auth
+from .. import db
+from ..models import User
 
 @auth.before_app_request
 def before_request():
