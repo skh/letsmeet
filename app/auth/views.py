@@ -46,7 +46,12 @@ def register():
             # TODO: flash error message
             return render_template('auth/register.html')
         else:
-            return "<h1>I am trapped in a DOM tree</h1>"
-
+            #create user and redirect
+            user = User(email=request.form['email'],
+                    name=request.form['name'],
+                    password_hash=request.form['password'])
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('auth.login'))
     else:
         return render_template('auth/register.html')
