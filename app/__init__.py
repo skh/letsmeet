@@ -1,6 +1,6 @@
 from flask import Flask
 from flask.ext.login import LoginManager
-from flask.ext.sqlalcheme import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
 
 db = SQLAlchemy()

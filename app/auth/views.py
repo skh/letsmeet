@@ -26,4 +26,7 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('auth/register.html')
+    if request.method == 'POST':
+        return "<h1>form posted!</h1>"
+    else:
+        return render_template('auth/register.html')
