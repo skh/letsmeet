@@ -49,7 +49,7 @@ def register():
             #create user and redirect
             user = User(email=request.form['email'],
                     name=request.form['name'],
-                    password_hash=request.form['password'])
+                    password=request.form['password'])
             db.session.add(user)
             db.session.commit()
             return redirect(url_for('auth.login'))
