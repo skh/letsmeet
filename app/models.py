@@ -1,12 +1,13 @@
-from werkzeug.security import generate_password_hash
-from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.login import UserMixin
+from . import db, login_manager
 
 participation = db.Table('participation',
     db.Column('user_id', db.Integer, db.ForeignKey('appusers.id')),
     db.Column('meeting_id', db.Integer, db.ForeignKey('meetings.id'))
 )
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     __tablename__ = 'appusers'
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(64), unique=True, index=True)
@@ -23,6 +24,9 @@ class User(db.Model):
     def password(self, password):
         self.password_hash = generate_password_hash(password)
 
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
 class Meeting(db.Model):
     __tablename__ = 'meetings'
     id = db.Column(db.Integer, primary_key = True)
@@ -38,8 +42,7 @@ class Meeting(db.Model):
         return {
             'id': self.id,
             'title': self.title
-        }
-    
+        }    
 
 class Action(db.Model):
     __tablename__ = 'actions'
@@ -60,3 +63,6 @@ class Timeslot(db.Model):
     active = db.Column(db.Boolean, default=False)
     meeting_id = db.Column(db.Integer, db.ForeignKey('meetings.id'))
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
