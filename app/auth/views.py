@@ -51,7 +51,6 @@ def register():
     else:
         return render_template('auth/register.html')
 
-
 def _validate(data, fields):
     missing = []
     for field in fields:
