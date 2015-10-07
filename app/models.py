@@ -32,6 +32,14 @@ class Meeting(db.Model):
     timeslots = db.relationship('Timeslot')
     users = db.relationship('User', secondary=participation)
 
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'title': self.title
+        }
+    
+
 class Action(db.Model):
     __tablename__ = 'actions'
     id = db.Column(db.Integer, primary_key = True)
