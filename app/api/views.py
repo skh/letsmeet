@@ -5,11 +5,12 @@ from . import api
 def parsemail():
     # see https://documentation.mailgun.com/quickstart-receiving.html
     if request.method == 'POST':
-         sender = request.form['sender']
-         subject = request.form['subject']
-         message-headers = request.form['message-headers']
-         body_plain = request.form['body-plain']
+        sender = request.form['sender']
+        subject = request.form['subject']
+        message_headers = request.form['message-headers']
+        body_plain = request.form['body-plain']
 
-     # Returned text is ignored but HTTP status code matters:
-     # Mailgun wants to see 2xx, otherwise it will make another attempt in 5 minutes
-     return make_response('OK', 200)
+
+    # Returned text is ignored but HTTP status code matters:
+    # Mailgun wants to see 2xx, otherwise it will make another attempt in 5 minutes
+    return make_response('OK', 200)
