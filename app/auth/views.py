@@ -21,23 +21,18 @@ def unconfirmed():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('auth/login.html')
+    if request.method == 'POST':
+        pass
+    else:
+        return render_template('auth/login.html')
 
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        missing = []
-        invalid = []
-        # validate fields
-        if request.form['email'] == "":
-            missing.append('email')
-        if request.form['name'] == "":
-            missing.append('name')
-        if request.form['password'] == "":
-            missing.append('password')
-        if request.form['confirm_password'] == "":
-            missing.append('confirm_password')
+        missing = _validate(
+            request.form, 
+            ['email', 'name', 'password', 'confirm_password'])
         # if not valid, show error
         if len(missing) > 0:
             # TODO: flash error message
@@ -55,3 +50,12 @@ def register():
             return redirect(url_for('auth.login'))
     else:
         return render_template('auth/register.html')
+
+
+def _validate(data, fields):
+    missing = []
+    for field in fields:
+        if data[field] == "":
+            missing.append(field)
+    print missing
+    return missing
