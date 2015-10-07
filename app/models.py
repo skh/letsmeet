@@ -27,6 +27,7 @@ class Meeting(db.Model):
     __tablename__ = 'meetings'
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(256), unique=True, index=True)
+    text = db.Column(db.Text())
     actions = db.relationship('Action')
     topics = db.relationship('Topic')
     timeslots = db.relationship('Timeslot')
