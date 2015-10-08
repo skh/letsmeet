@@ -1,7 +1,7 @@
 $(function () {
 	var ViewModel = function () {
 		this.meetings = ko.observableArray();
-		this.data = ko.observable();
+		this.json = ko.observable();
 		this.loadMeetings();
 	};
 
@@ -11,6 +11,7 @@ $(function () {
 			method: 'GET',
 			done: function (data) {
 				this.json(data);
+				console.log(data);
 			}
 		});
 	};
