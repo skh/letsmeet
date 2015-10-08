@@ -26,18 +26,30 @@ def unconfirmed():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+
         missing = _validate(
             request.form,
             ['email', 'password'])
+
         if len(missing) > 0:
+            flash('Please enter your email address and password.')
             return render_template('auth/login.html')
+
         uq = db.session.query(User).filter_by(email=request.form['email'])
-        if uq.count() == 1 and uq.one().verify_password(request.form['password']):
-            login_user(user, True)
-            return redirect(url_for('main.index'))
-        else:
-            flash('Login unsuccessful.')
+
+        if uq.count() != 1:
+            flash('No user with email ' + request.form['email'] + '.')
             return render_template('auth/login.html')
+
+        user = uq.one()
+
+        if not uq.one().verify_password(request.form['password']):
+            flash ('Incorrect password.')
+            return render_template('auth/login.html')
+            
+        login_user(user, True)
+        return redirect(url_for('main.index'))
+
     else:
         return render_template('auth/login.html')
 
