@@ -6,11 +6,11 @@ from ..models import User, Meeting
 
 
 @main.route('/')
+@login_required
 def index():
     return render_template('index.html')
 
 @main.route('/meetings', methods=['GET'])
-@login_required
 def list_meetings():
     # if logged in etc.
     if current_user.is_authenticated:
