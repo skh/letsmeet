@@ -4,20 +4,32 @@ $(function () {
 		this.text = ko.observable(meeting.text);
 	}
 	var ViewModel = function () {
+		var self = this;
+
 		this.meetings = ko.observableArray();
-		this.json = ko.observable();
+		this.currentMeeting = ko.observable();
+
+		this.loadMeetings = function () {
+			self.meetings = ko.observableArray();
+			$.get('/meetinglist', function (data) {
+				data.Meetings.forEach(function (meeting) {
+					self.meetings.push(new Meeting(meeting));
+				});
+			});
+		};
+
+		this.selectMeeting = function (meeting) {
+			self.currentMeeting(meeting);
+		};
+
+
 		this.loadMeetings();
+		if (this.meetings.length > 0) {
+			this.currentMeeting(this.meetings()[0]);
+		}
 	};
 
-	ViewModel.prototype.loadMeetings = function () {
-		var self = this;
-		self.meetings = ko.observableArray();
-		$.get('/meetinglist', function (data) {
-			data.Meetings.forEach(function (meeting) {
-				self.meetings.push(new Meeting(meeting));
-			});
-		});
-	};
+	
 
 	var m = new ViewModel();
 
