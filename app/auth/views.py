@@ -4,6 +4,7 @@ from flask.ext.login import login_user, logout_user, login_required, \
 from . import auth
 from .. import db
 from ..models import User
+from ..email import send_email
 
 '''
 @auth.before_app_request
@@ -50,24 +51,31 @@ def register():
     if request.method == 'POST':
         missing = _validate(
             request.form, 
-            ['email', 'name', 'password', 'confirm_password'])
+            ['email'])
         # if not valid, show error
         if len(missing) > 0:
             # TODO: flash error message
             return render_template('auth/register.html')
-        elif request.form['confirm_password'] != request.form['password']:
-            # TODO: flash error message
-            return render_template('auth/register.html')
         else:
             #create user and redirect
-            user = User(email=request.form['email'],
-                    name=request.form['name'],
-                    password=request.form['password'])
+            user = User(email=request.form['email'])
             db.session.add(user)
             db.session.commit()
+            token = user.generate_confirmation_token()
+            send_email(user.email, 'Confirm Your Account',
+                'auth/email/confirm', user=user, token=token)
             return redirect(url_for('auth.login'))
     else:
         return render_template('auth/register.html')
+
+
+@auth.route('/confirm/<token>', methods=['GET', 'POST'])
+def confirm(token):
+    if request.method == 'POST':
+        pass
+    else:
+        return render_template('auth/confirm.html', token=token)
+
 
 def _validate(data, fields):
     missing = []

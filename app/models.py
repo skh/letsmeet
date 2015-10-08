@@ -1,5 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask.ext.login import UserMixin
+from flask import current_app
 from . import db, login_manager
 
 participation = db.Table('participation',
@@ -26,6 +28,10 @@ class User(UserMixin,db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def generate_confirmation_token(self, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'confirm': self.id})
 
 class Meeting(db.Model):
     __tablename__ = 'meetings'

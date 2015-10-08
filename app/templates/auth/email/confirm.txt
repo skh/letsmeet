@@ -1,0 +1,12 @@
+Dear {{ user.username }},
+
+Welcome to letsmeet!
+
+To confirm your account please click on the following link:
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+Sincerely,
+Sonja
+
+Note: You are receiving this email because someone used your email address to register on letsmeet, a web app to organize developer team meetings currently in development. If this wasn't you, please accept my apologies and ignore this email.
