@@ -7,7 +7,7 @@ $(function () {
 		var self = this;
 
 		this.meetings = ko.observableArray();
-		this.currentMeeting = ko.observable();
+		this.selectedMeeting = ko.observable();
 
 		this.loadMeetings = function () {
 			self.meetings = ko.observableArray();
@@ -19,7 +19,7 @@ $(function () {
 		};
 
 		this.selectMeeting = function (meeting) {
-			self.currentMeeting(meeting);
+			self.selectedMeeting(meeting);
 		};
 
 

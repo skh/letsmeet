@@ -17,10 +17,10 @@
       </ul>
     </div>
   </div>
-  <div class="large-8 columns">
+  <div class="large-8 columns" data-bind="with: selectedMeeting">
     <div class="row">
       <div class="small-6 columns">
-        <div class="panel">Text (editable)</div>
+        <div class="panel" data-bind="text: text"></div>
       </div>
       <div class="small-6 columns">
         <div class="panel">Topics (addable)</div>
