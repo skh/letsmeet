@@ -6,6 +6,6 @@ what the app can't do at the moment:
 - edit usernames
 - change passwords
 
-- handle subsequent emails -- they will be ignored for now as long as the subject isn't changed
-
+- send out a confirmation email after meeting creation
+- handle subsequent emails -- for now any reply creates a new meeting
 - automatically invite people in Cc who are not yet users of the site

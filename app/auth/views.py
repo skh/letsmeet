@@ -50,6 +50,7 @@ def logout():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        taboo = 'helper@sandbox196a545932dc4ad6ab58ea66895a5405.mailgun.org'
         missing = _validate(
             request.form, 
             ['email'])
@@ -57,22 +58,25 @@ def register():
         if len(missing) > 0:
             flash('Please enter your email address.')
             return render_template('auth/register.html')
-        else:
-            # email must be unique
-            uq = db.session.query(User).filter_by(email=request.form['email'])
-            if uq.count() > 0:
-                flash('This email has already been registered.')
-                return redirect(url_for('auth.register'))
+        if request.form['email'] == taboo:
+            flash('Nope ;-) ')
+            return render_template('auth/register.html')
+    
+        # email must be unique
+        uq = db.session.query(User).filter_by(email=request.form['email'])
+        if uq.count() > 0:
+            flash('This email has already been registered.')
+            return redirect(url_for('auth.register'))
 
-            # create user and redirect
-            user = User(email=request.form['email'])
-            db.session.add(user)
-            db.session.commit()
-            token = user.generate_confirmation_token()
-            send_email(user.email, 'Confirm Your Account',
-                'auth/email/confirm', user=user, token=token, email=user.email)
-            flash('Success! Please check your inbox for the confirmation email.')
-            return redirect(url_for('auth.login'))
+        # create user and redirect
+        user = User(email=request.form['email'])
+        db.session.add(user)
+        db.session.commit()
+        token = user.generate_confirmation_token()
+        send_email(user.email, 'Confirm Your Account',
+            'auth/email/confirm', user=user, token=token, email=user.email)
+        flash('Success! Please check your inbox for the confirmation email.')
+        return redirect(url_for('auth.login'))
     else:
         return render_template('auth/register.html')
 
