@@ -44,5 +44,10 @@
     </div>
   </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 {% endblock %}

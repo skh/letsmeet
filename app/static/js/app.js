@@ -1,12 +1,10 @@
 $(function () {
-
-	var Meeting = function () {};
-
 	var ViewModel = function () {
 		this.meetings = ko.observableArray();
 		this.data = ko.observable();
 		this.loadMeetings();
 	};
+
 	ViewModel.prototype.loadMeetings = function () {
 		$.ajax({
 			url: '/meetinglist',
