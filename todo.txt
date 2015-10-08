@@ -1,0 +1,7 @@
+TODO
+
+what the app can't do at the moment:
+
+- delete accounts
+- edit usernames
+- change passwords

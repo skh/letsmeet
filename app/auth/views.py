@@ -1,4 +1,4 @@
-from flask import redirect, request, url_for, render_template
+from flask import redirect, request, url_for, render_template, flash
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import auth
@@ -36,6 +36,7 @@ def login():
             login_user(user, True)
             return redirect(url_for('main.index'))
         else:
+            flash('Login unsuccessful.')
             return render_template('auth/login.html')
     else:
         return render_template('auth/login.html')
@@ -54,13 +55,13 @@ def register():
             ['email'])
         # if not valid, show error
         if len(missing) > 0:
-            # TODO: flash error message
+            flash('Please enter your email address.')
             return render_template('auth/register.html')
         else:
             # email must be unique
             uq = db.session.query(User).filter_by(email=request.form['email'])
             if uq.count() > 0:
-                # flash: email exists
+                flash('This email has already been registered.')
                 return redirect(url_for('auth.register'))
 
             # create user and redirect
@@ -70,6 +71,7 @@ def register():
             token = user.generate_confirmation_token()
             send_email(user.email, 'Confirm Your Account',
                 'auth/email/confirm', user=user, token=token, email=user.email)
+            flash('Success! Please check your inbox for the confirmation email.')
             return redirect(url_for('auth.login'))
     else:
         return render_template('auth/register.html')
@@ -83,11 +85,11 @@ def confirm(token, email):
             ['name', 'password', 'confirm_password'])
 
         if len(missing) > 0:
-            # flash: please fill in all fields
+            flash('Please fill in all fields.')
             return render_template('auth/confirm.html', token=token, email=email)
 
         if request.form['password'] != request.form['confirm_password']:
-            # flash: passwords must match
+            flash('Passwords must match.')
             return render_template('auth/confirm.html', token=token, email=email)
 
         uq = db.session.query(User).filter_by(email=email)
@@ -101,7 +103,7 @@ def confirm(token, email):
                 login_user(user, True)
                 return redirect(url_for('main.index'))
             else:
-                # flash: token invalid or expired
+                flash('The confirmation token is invalid.')
                 return redirect(url_for('auth.register'))
         else:
             # flash no such email

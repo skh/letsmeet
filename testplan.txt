@@ -1,0 +1,12 @@
+Testplan
+
+- register with new email
+- register with the same email -> error
+- confirm email with link in email
+- leave fields empty / wrong in various combination -> errors
+- confirm successfully
+- register once again with the same email -> error
+
+- invite second email address to meeting -> emails sent: meeting, invite
+- invite same email to another meeting -> emails sent: meeting only
+- try to invite another@sandbox... address -> silent fail
