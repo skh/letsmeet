@@ -11,6 +11,26 @@ def parsemail():
         subject = request.form['subject']
         message_headers = request.form['message-headers']
         body_plain = request.form['body-plain']
+
+        # sanitize subject: ignore 'Re: ' etc.
+        # if subject already exists, do nothing
+
+        # check if user exists
+        uq = db.session.query(User).filter_by(email=sender)
+        if uq.count() == 1:
+            # create meeting
+            meeting = Meeting(title=subject)
+            meeting.users.append(uq.one())
+            db.session.add(meeting)
+            db.session.commit()
+
+            # send email
+
+        # get participant list from To:, From: and Cc:
+        # for each participant:
+          # if registered: send invite
+          # if unconfirmed: do nothing
+          # if unknown: create account, send confirmation mail, send invite
     else:
         user = db.session.query(User).filter_by(id=1).one()
         meeting = Meeting(title="Meeting 1")
