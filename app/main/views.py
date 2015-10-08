@@ -12,7 +12,7 @@ def index():
 @main.route('/meetings')
 @login_required
 def meetings():
-    return render_template('index.html')
+    return render_template('meetings.html')
 
 @main.route('/meetinglist', methods=['GET'])
 def list_meetings():
