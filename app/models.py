@@ -59,7 +59,8 @@ class Meeting(db.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'title': self.title
+            'title': self.title,
+            'text': self.text
         }    
 
 class Action(db.Model):
