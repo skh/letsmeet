@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.name }}{% else %}Stranger{% endif %}!</h1>
+  <div class="row">
+    <div class="large-12">
+      <h1>Welcome to letsmeet!</h1>
+      <ol>
+        <li>Go to <a href="{{ url_for('auth.register') }}">the registration page</a> and create an account. Use a real email address, you will need it!</li>
+        <li>Convince a few other people to register as well!</li>
+        <li>Send an email from your registered address to other registered users, and put <a href="mailto:helper@sandbox196a545932dc4ad6ab58ea66895a5405.mailgun.org">helper@sandbox196a545932dc4ad6ab58ea66895a5405.mailgun.org</a> in Cc.</li>
+        <li>Visit the <a href="#">Meetings</a> page and enjoy your newly created Meeting!</li>
+        <li>Create a few more meetings so you have test data.</li>
+        <li>Code is available on <a href="http://github.com/skh/letsmeet">github</a></li>
+        <li>I would love to hear your feedback: <a href="mailto:krauseha@gmail.com">krauseha@gmail.com</a></li>
+      </ol>
+    </div>
+  </div>
 {% endblock %}
