@@ -52,7 +52,7 @@ class Meeting(db.Model):
     text = db.Column(db.Text())
     actions = db.relationship('Action')
     topics = db.relationship('Topic')
-    timeslots = db.relationship('Timeslot')
+    pullrequests = db.relationship('PullRequest')
     users = db.relationship('User', secondary=participation)
 
     @property
@@ -74,12 +74,12 @@ class Topic(db.Model):
     text = db.Column(db.Text())
     meeting_id = db.Column(db.Integer, db.ForeignKey('meetings.id'))
 
-class Timeslot(db.Model):
-    __tablename__ = 'timeslots'
+class PullRequest(db.Model):
+    __tablename__ = 'pullrequests'
     id = db.Column(db.Integer, primary_key = True)
-    datetime = db.Column(db.DateTime())
-    active = db.Column(db.Boolean, default=False)
+    url = db.Column(db.String(256))
     meeting_id = db.Column(db.Integer, db.ForeignKey('meetings.id'))
+
 
 @login_manager.user_loader
 def load_user(user_id):

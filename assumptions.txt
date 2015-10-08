@@ -1,0 +1,10 @@
+Assumptions:
+
+- a calendar already exists
+- code is in github or a similar tool which facilitates code review
+- people are sharing one screen during the meeting, either by sitting in one room or through webex/skype/etc.
+
+Therefore, letsmeet does not:
+- offer any scheduling functionality
+- does not contain a review / code edit tool
+- does not offer real-time collaborative editing
