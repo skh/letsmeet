@@ -7,3 +7,5 @@ what the app can't do at the moment:
 - change passwords
 
 - handle subsequent emails -- they will be ignored for now as long as the subject isn't changed
+
+- automatically invite people in Cc who are not yet users of the site
