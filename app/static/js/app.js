@@ -25,7 +25,7 @@ $(function () {
 
 		this.loadMeetings();
 		if (this.meetings.length > 0) {
-			this.currentMeeting(this.meetings()[0]);
+			this.selectedMeeting(this.meetings()[0]);
 		}
 	};
 
