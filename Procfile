@@ -1,1 +1,1 @@
-web: gunicorn letsmeet.wsgi --log-file -
+web: gunicorn "letsmeet:create_app('heroku')" --log-file -
