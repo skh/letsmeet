@@ -1,8 +1,8 @@
 <p>Dear {{ user.username }},</p>
 <p>Welcome to <b>letsmeet</b>!</p>
-<p>To confirm your account please <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">click here</a>.</p>
+<p>To confirm your account please <a href="{{ url_for('auth.confirm', token=token, email=email, _external=True) }}">click here</a>.</p>
 <p>Alternatively, you can paste the following link in your browser's address bar:</p>
-<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
+<p>{{ url_for('auth.confirm', token=token, email=email, _external=True) }}</p>
 <p>Sincerely,</p>
 <p>Sonja</p>
 <p><small>Note: You are receiving this email because someone used your email address to register on letsmeet, a web app to organize developer team meetings currently in development. If this wasn't you, please accept my apologies and ignore this email.</small></p>
