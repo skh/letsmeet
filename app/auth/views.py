@@ -31,8 +31,8 @@ def login():
             ['email', 'password'])
         if len(missing) > 0:
             return render_template('auth/login.html')
-        user = db.session.query(User).filter_by(email=request.form['email']).one()
-        if user is not None and user.verify_password(request.form['password']):
+        uq = db.session.query(User).filter_by(email=request.form['email'])
+        if uq.count() == 1 and uq.one().verify_password(request.form['password']):
             login_user(user, True)
             return redirect(url_for('main.index'))
         else:
