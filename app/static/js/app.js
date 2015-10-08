@@ -15,7 +15,7 @@ $(function () {
 				data.Meetings.forEach(function (meeting) {
 					self.meetings.push(new Meeting(meeting));
 				});
-				if (self.meetings.length > 0) {
+				if (self.meetings.length() > 0) {
 					self.selectedMeeting(self.meetings()[0]);
 				}
 			});
