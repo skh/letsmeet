@@ -1,4 +1,4 @@
-from flask import render_template, jsonify
+from flask import render_template, jsonify, make_response
 from flask.ext.login import current_user, login_required
 from . import main
 from .. import db, login_manager
@@ -21,4 +21,19 @@ def list_meetings():
         return jsonify(Meetings=[m.serialize for m in current_user.meetings])
     else:
         return '{"boo": true}'
+
+@main.route('/meeting/<id>', methods=['POST'])
+def update_meeting(id):
+	mq = db.session.query(Meeting).filter(id=id)
+	if mq.count != 1:
+		return make_response('No such item', 404)
+	meeting = mq.one()
+	if request.form.has_key('text'):
+		meeting.text = request.form['text']
+		db.session.add(meeting)
+		db.session.commit()
+
+	return make_response('OK', 200)
+
+
 
