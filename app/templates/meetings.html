@@ -20,7 +20,10 @@
   <div class="large-8 columns" data-bind="with: selectedMeeting">
     <div class="row">
       <div class="small-6 columns">
-        <div class="panel" data-bind="text: text"></div>
+        <div class="panel" data-bind="text: text">
+          <p data-bind="text: text, event: {dblclick: $parent.editText}"></p>
+          <input class="edit" type="textarea" data-bind="value: text, valueUpdate: 'afterkeydown', enterKey: $parent.saveEditText, escapeKey: $parent.cancelEditText, selectAndFocus: editing, event: { blur: $parent.saveEditText }">
+        </div>
       </div>
       <div class="small-6 columns">
         <div class="panel">Topics (addable)</div>

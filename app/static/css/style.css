@@ -14,3 +14,15 @@
 	left: -24px;
 	top: 8px;
 }
+
+#meeting-panel .editing .view {
+	display: none;
+}
+
+#meeting-panel .edit {
+	display: none;
+}
+
+#meeting-panel .editing .edit {
+	display: block;
+}
