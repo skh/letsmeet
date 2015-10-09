@@ -35,3 +35,7 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;  
 }
+
+.debug {
+	display: none;
+}
