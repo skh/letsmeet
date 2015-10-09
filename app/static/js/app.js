@@ -3,6 +3,18 @@ $(function () {
 		this.title = ko.observable(meeting.title);
 		this.text = ko.observable(meeting.text);
 		this.editing = false;
+
+		this.editText = function(text) {
+			console.log("I'm here");
+			this.editing(true);
+		}
+
+		this.saveEditText = function(text) {
+			this.editing(false);
+		}
+		this.saveEditText = function(text) {
+			this.editing(false);
+		}
 	}
 	var ViewModel = function () {
 		var self = this;
@@ -28,6 +40,7 @@ $(function () {
 		};
 
 		this.editText = function(meeting) {
+			console.log("I'm there")
 			meeting.editing(true);
 		}
 
