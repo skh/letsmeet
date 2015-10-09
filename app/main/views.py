@@ -24,10 +24,9 @@ def list_meetings():
 
 @main.route('/meeting/<id>', methods=['POST'])
 def update_meeting(id):
-	mq = db.session.query(Meeting).filter(id=id)
-	if mq.count != 1:
+	meeting = db.session.query(Meeting).get(id)
+	if meeting == None:
 		return make_response('No such item', 404)
-	meeting = mq.one()
 	if request.form.has_key('text'):
 		meeting.text = request.form['text']
 		db.session.add(meeting)
