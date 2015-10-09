@@ -21,8 +21,9 @@
     <div class="row">
       <div class="small-6 columns">
         <div class="panel" data-bind="css: { editing: editing }">
+          <h4 data-bind="text: title"></h4>
           <div class="view" data-bind="text: text, event: {dblclick: $root.editMeetingText}"></div>
-          <textarea class="edit" rows="10" cols="50" data-bind="value: text, valueUpdate: 'afterkeydown', enterKey: $parent.saveEditText, escapeKey: $root.cancelEditMeetingText, selectAndFocus: editing, event: { blur: $root.saveEditMeetingText }"></textarea>
+          <textarea class="edit" rows="10" cols="50" data-bind="value: text, valueUpdate: 'afterkeydown', selectAndFocus: editing, event: { blur: $root.saveEditMeetingText }"></textarea>
         </div>
       </div>
       <div class="small-6 columns">
