@@ -22,7 +22,7 @@
       <div class="small-6 columns">
         <div class="panel" data-bind="css: { editing: editing }">
           <div class="view" data-bind="text: text, event: {dblclick: $root.editMeetingText}"></div>
-          <input class="edit" type="textarea" data-bind="value: text, valueUpdate: 'afterkeydown', enterKey: $parent.saveEditText, escapeKey: $root.cancelEditMeetingText, selectAndFocus: editing, event: { blur: $root.saveEditMeetingText }">
+          <textarea class="edit" rows="10" cols="50" data-bind="value: text, valueUpdate: 'afterkeydown', enterKey: $parent.saveEditText, escapeKey: $root.cancelEditMeetingText, selectAndFocus: editing, event: { blur: $root.saveEditMeetingText }">
         </div>
       </div>
       <div class="small-6 columns">
